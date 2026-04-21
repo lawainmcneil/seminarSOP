@@ -54,10 +54,38 @@ const getNextActionText = (phase, segment, friction) => {
   }
 
   const paperworkLine = state.paperworkSent
-    ? "Paperwork is already out, so coach toward clarity instead of more explanation."
-    : "Get paperwork out immediately after the meeting so momentum is not lost.";
+    ? "Paperwork is already out, so the move now is coaching toward a clean decision instead of re-explaining the whole plan."
+    : "Get the paperwork out immediately after the meeting so momentum is not lost before hesitation hardens.";
 
-  return `${paperworkLine} ${segment.coachFrame} Focus on ${phase.name.toLowerCase()} using the ${friction.label.toLowerCase()} cue.`;
+  const temperatureActions = {
+    hot: {
+      unclear: "Send a short Phase 2 note that asks what one piece still feels unsettled, then answer only that point.",
+      timing: "Offer a smaller first step now and give them a simple way to say yes without treating this like one huge decision.",
+      spouse: "Propose a brief spouse-alignment call focused on their shared goal and the one decision that still needs agreement.",
+      paperwork: "Tell them exactly what to sign, what happens next, and how little time the final step should take.",
+      risk: "Reassure them that moving forward is adjustable and that the bigger risk is leaving the current problem untouched.",
+      silent: "Send one direct clarity message asking whether they feel ready to proceed or prefer to revisit later."
+    },
+    warm: {
+      unclear: "Use Phase 2 language to surface the specific confusion, then simplify the recommendation back to the client’s original goal.",
+      timing: "Reduce commitment friction by offering phased implementation or one account first instead of a full immediate move.",
+      spouse: "Pause the chase and invite the other decision-maker into a calm review so hesitation does not stay hidden.",
+      paperwork: "Walk them through the paperwork sequence in plain language and remove any uncertainty about process or effort.",
+      risk: "Use Phase 3 framing to contrast the risks of staying put with the flexibility of making an adjustable first move.",
+      silent: "Do one calm check-in built around clarity, not pursuit, and prepare to route them to a clean later decision if they stay quiet."
+    },
+    cold: {
+      unclear: "Do not over-pursue. Send one simple note asking whether anything still feels unclear before you either close the loop or nurture.",
+      timing: "Assume this is not urgent for them and offer a lower-commitment revisit later instead of pressing for action now.",
+      spouse: "Acknowledge that partner alignment may need more time and invite them back when both people are ready to review together.",
+      paperwork: "Remove the sense of burden by making the next step feel optional, contained, and easy to restart later.",
+      risk: "Use a calm risk reframe once, then stop selling and let them choose between later review and nurture.",
+      silent: "Send a clean decision-clarity note instead of another casual follow-up, then move them to nurture if there is still no response."
+    }
+  };
+
+  const action = temperatureActions[state.temperature]?.[state.friction] || `${segment.coachFrame} Focus on ${phase.name.toLowerCase()} using the ${friction.label.toLowerCase()} cue.`;
+  return `${paperworkLine} ${action}`;
 };
 
 const renderTemperatureButtons = () => {
@@ -74,12 +102,12 @@ const renderTimeline = (currentPhaseId) => {
     const isActive = phase.id === currentPhaseId;
     return `
       <article class="${isActive ? "border-pine/25 bg-pine/[0.06]" : "border-summit/8 bg-white/75"} rounded-[1.5rem] border p-5 transition">
-        <div class="flex items-start justify-between gap-4">
+        <div class="flex flex-col gap-4">
           <div>
             <p class="text-xs font-black uppercase tracking-[0.16em] ${isActive ? "text-pine" : "text-slate"}">${phase.window}</p>
             <h3 class="mt-2 font-display text-2xl font-bold text-summit">${phase.name}</h3>
           </div>
-          <span class="${isActive ? "bg-pine text-white" : "bg-glacier text-pine"} rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em]">${isActive ? "Recommended now" : "Use when due"}</span>
+          <span class="${isActive ? "bg-pine text-white" : "bg-glacier text-pine"} inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em]">${isActive ? "Recommended now" : "Use when due"}</span>
         </div>
         <p class="mt-3 text-sm leading-7 text-slate">${phase.objective}</p>
         <div class="mt-4 grid gap-3 sm:grid-cols-2">
@@ -139,9 +167,9 @@ const renderCRMBoard = () => {
 
   elements.crmBoard.innerHTML = cards.map((card) => `
     <article class="rounded-[1.4rem] border ${card.status === "complete" ? "border-pine/20 bg-pine/[0.07]" : card.status === "active" ? "border-trail/35 bg-trail/[0.08]" : "border-summit/8 bg-white/80"} p-5">
-      <div class="flex items-center justify-between gap-4">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h3 class="text-sm font-black uppercase tracking-[0.14em] text-summit">${card.stage}</h3>
-        <span class="${card.status === "complete" ? "bg-pine text-white" : card.status === "active" ? "bg-trail text-summit" : "bg-glacier text-slate"} rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em]">${card.status}</span>
+        <span class="${card.status === "complete" ? "bg-pine text-white" : card.status === "active" ? "bg-trail text-summit" : "bg-glacier text-slate"} inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em]">${card.status}</span>
       </div>
       <p class="mt-3 text-sm leading-7 text-slate">${card.note}</p>
     </article>
