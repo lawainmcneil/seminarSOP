@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seminar Follow-Up System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            summit: "#132220",
+            pine: "#245b56",
+            moss: "#4f8f89",
+            parchment: "#f5efe3",
+            mist: "#e5efec",
+            trail: "#d6a84d",
+            ember: "#a73838",
+            slate: "#5d6c6a"
+          },
+          fontFamily: {
+            sans: ["Manrope", "ui-sans-serif", "system-ui", "sans-serif"],
+            display: ["Space Grotesk", "ui-sans-serif", "system-ui", "sans-serif"]
+          },
+          boxShadow: {
+            glow: "0 26px 90px rgba(19, 34, 32, 0.16)"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(214, 168, 77, 0.20), transparent 26%),
+        radial-gradient(circle at top right, rgba(79, 143, 137, 0.16), transparent 28%),
+        linear-gradient(180deg, #f9f6ef 0%, #eef3f0 52%, #f7faf8 100%);
+      color: #132220;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(19, 34, 32, 0.95), rgba(36, 91, 86, 0.92)),
+        url("https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80");
+      background-position: center;
+      background-size: cover;
+    }
+
+    .surface {
+      border: 1px solid rgba(19, 34, 32, 0.08);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 26px 90px rgba(19, 34, 32, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .field {
+      width: 100%;
+      border-radius: 1rem;
+      border: 1px solid rgba(19, 34, 32, 0.12);
+      background: rgba(255, 255, 255, 0.92);
+      padding: 0.82rem 0.95rem;
+      color: #132220;
+      font-size: 0.96rem;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5d6c6a;
+    }
+
+    .copy-button {
+      border-radius: 999px;
+      border: 1px solid rgba(19, 34, 32, 0.12);
+      background: rgba(255, 255, 255, 0.88);
+      padding: 0.6rem 0.9rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #245b56;
+      transition: 180ms ease;
+    }
+
+    .copy-button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(36, 91, 86, 0.28);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+  <main>
+    <section class="hero px-4 py-16 text-white sm:px-6 lg:px-8">
+      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div>
+          <p class="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-white/85">Coaching-based advisor workflow</p>
+          <h1 class="mt-6 max-w-5xl font-display text-4xl font-bold leading-[1.02] sm:text-6xl">
+            Turn seminar leads into a calm, repeatable follow-up system for hot, warm, and cold prospects.
+          </h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-white/84">
+            This module gives advisors a guided process from verbal yes to signed commitment, without pressure tactics, awkward chasing, or lost trust. It coaches the advisor on what to say next, why that move matters, and when to send it.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#coach" class="rounded-2xl bg-trail px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-summit">Open coaching module</a>
+            <a href="#templates" class="rounded-2xl border border-white/25 px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-white">View templates</a>
+          </div>
+        </div>
+
+        <article class="rounded-[2rem] border border-white/12 bg-white/10 p-6 shadow-glow backdrop-blur">
+          <p class="text-xs font-black uppercase tracking-[0.18em] text-trail">System promise</p>
+          <div class="mt-5 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-[1.4rem] bg-white/8 p-5">
+              <p class="text-[11px] font-black uppercase tracking-[0.14em] text-white/70">Pillar 1</p>
+              <p class="mt-2 font-display text-2xl font-bold">Clarity</p>
+              <p class="mt-2 text-sm leading-7 text-white/75">Remove confusion and isolate the one thing keeping action from happening.</p>
+            </div>
+            <div class="rounded-[1.4rem] bg-white/8 p-5">
+              <p class="text-[11px] font-black uppercase tracking-[0.14em] text-white/70">Pillar 2</p>
+              <p class="mt-2 font-display text-2xl font-bold">Safety</p>
+              <p class="mt-2 text-sm leading-7 text-white/75">Reduce the perceived risk and irreversibility of saying yes.</p>
+            </div>
+            <div class="rounded-[1.4rem] bg-white/8 p-5">
+              <p class="text-[11px] font-black uppercase tracking-[0.14em] text-white/70">Pillar 3</p>
+              <p class="mt-2 font-display text-2xl font-bold">Decision</p>
+              <p class="mt-2 text-sm leading-7 text-white/75">Guide the lead to a clean decision instead of endless chasing.</p>
+            </div>
+            <div class="rounded-[1.4rem] bg-white/8 p-5">
+              <p class="text-[11px] font-black uppercase tracking-[0.14em] text-white/70">Outcome</p>
+              <p class="mt-2 font-display text-2xl font-bold">Signed or nurtured</p>
+              <p class="mt-2 text-sm leading-7 text-white/75">Every lead ends in execution, deferment, or a healthy nurture path.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="coach" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <p class="text-xs font-black uppercase tracking-[0.18em] text-pine">Advisor coach</p>
+        <h2 class="mt-3 font-display text-3xl font-bold sm:text-5xl">See the next best follow-up move before you send it</h2>
+        <p class="mt-4 max-w-3xl text-base leading-7 text-slate">
+          Tune the lead temperature, timing, and friction signal, then let the module coach the advisor on the right phase, tone, and follow-up objective.
+        </p>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+        <article class="surface rounded-[2rem] p-6">
+          <div class="grid gap-5 sm:grid-cols-2">
+            <label>
+              <span class="field-label">Lead name</span>
+              <input id="leadName" class="field mt-2" type="text" value="Seminar Lead" />
+            </label>
+            <label>
+              <span class="field-label">Days since meeting</span>
+              <input id="daysSinceMeeting" class="field mt-2" type="number" min="0" max="90" value="3" />
+            </label>
+          </div>
+
+          <div class="mt-5">
+            <p class="field-label">Lead temperature</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <button type="button" data-temp="hot">Hot</button>
+              <button type="button" data-temp="warm">Warm</button>
+              <button type="button" data-temp="cold">Cold</button>
+            </div>
+          </div>
+
+          <div class="mt-5 grid gap-5 sm:grid-cols-2">
+            <label class="rounded-[1.2rem] border border-summit/8 bg-parchment/70 p-4">
+              <span class="flex items-center justify-between gap-4">
+                <span>
+                  <span class="field-label">Paperwork sent</span>
+                  <span class="mt-2 block text-sm leading-6 text-slate">Has the paperwork already gone out?</span>
+                </span>
+                <input id="paperworkSent" class="h-5 w-5 accent-pine" type="checkbox" checked />
+              </span>
+            </label>
+            <label class="rounded-[1.2rem] border border-summit/8 bg-parchment/70 p-4">
+              <span class="flex items-center justify-between gap-4">
+                <span>
+                  <span class="field-label">Signed</span>
+                  <span class="mt-2 block text-sm leading-6 text-slate">Has the lead already completed commitment?</span>
+                </span>
+                <input id="signed" class="h-5 w-5 accent-pine" type="checkbox" />
+              </span>
+            </label>
+          </div>
+
+          <label class="mt-5 block">
+            <span class="field-label">Primary friction signal</span>
+            <select id="friction" class="field mt-2">
+              <option value="unclear">Something is unclear</option>
+              <option value="timing">Bad timing</option>
+              <option value="spouse">Needs spouse or partner alignment</option>
+              <option value="paperwork">Paperwork friction</option>
+              <option value="risk">Fear of making the wrong move</option>
+              <option value="silent">No response / silence</option>
+            </select>
+          </label>
+        </article>
+
+        <article class="rounded-[2rem] bg-summit p-6 text-white shadow-glow">
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <p class="text-xs font-black uppercase tracking-[0.18em] text-trail">Recommended mode</p>
+              <h3 id="coachingLabel" class="mt-2 font-display text-3xl font-bold">Warm lead coaching mode</h3>
+              <p id="coachingFrame" class="mt-4 max-w-2xl text-sm leading-7 text-white/82"></p>
+            </div>
+            <div class="rounded-[1.4rem] bg-white/8 px-4 py-3 text-right">
+              <p class="text-[11px] font-black uppercase tracking-[0.14em] text-white/65">Primary channel</p>
+              <p id="channelStat" class="mt-2 font-display text-2xl font-bold">Email</p>
+            </div>
+          </div>
+
+          <div class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div class="rounded-[1.3rem] bg-white/8 p-4">
+              <p class="text-[11px] font-black uppercase tracking-[0.14em] text-white/65">Momentum</p>
+              <p id="momentumStat" class="mt-2 text-lg font-bold"></p>
+            </div>
+            <div class="rounded-[1.3rem] bg-white/8 p-4">
+              <p class="text-[11px] font-black uppercase tracking-[0.14em] text-white/65">Default risk</p>
+              <p id="riskStat" class="mt-2 text-lg font-bold"></p>
+            </div>
+            <div class="rounded-[1.3rem] bg-white/8 p-4">
+              <p class="text-[11px] font-black uppercase tracking-[0.14em] text-white/65">Recommended phase</p>
+              <p id="phaseStat" class="mt-2 text-lg font-bold"></p>
+            </div>
+            <div class="rounded-[1.3rem] bg-white/8 p-4">
+              <p class="text-[11px] font-black uppercase tracking-[0.14em] text-white/65">Friction cue</p>
+              <p id="frictionCue" class="mt-2 text-lg font-bold"></p>
+            </div>
+          </div>
+
+          <div class="mt-6 grid gap-4 lg:grid-cols-2">
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/6 p-5">
+              <p class="text-xs font-black uppercase tracking-[0.16em] text-trail">Next best action</p>
+              <p id="nextAction" class="mt-3 text-sm leading-7 text-white/86"></p>
+            </div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/6 p-5">
+              <p class="text-xs font-black uppercase tracking-[0.16em] text-trail">Advisor coach note</p>
+              <p id="advisorPrompt" class="mt-3 text-sm leading-7 text-white/86"></p>
+            </div>
+          </div>
+
+          <div class="mt-4 rounded-[1.5rem] border border-white/10 bg-white/6 p-5">
+            <p class="text-xs font-black uppercase tracking-[0.16em] text-trail">Friction play</p>
+            <p id="frictionPlay" class="mt-3 text-sm leading-7 text-white/86"></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <p class="text-xs font-black uppercase tracking-[0.18em] text-pine">Follow-up sequence</p>
+        <h2 class="mt-3 font-display text-3xl font-bold sm:text-5xl">A six-phase system from meeting to decision</h2>
+        <p class="mt-4 max-w-3xl text-base leading-7 text-slate">
+          This system is built to remove friction between intention and action, not to pressure a lead into signing.
+        </p>
+      </div>
+      <div id="timeline" class="grid gap-4 xl:grid-cols-2"></div>
+    </section>
+
+    <section id="templates" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <p class="text-xs font-black uppercase tracking-[0.18em] text-pine">Templates and scripts</p>
+        <h2 class="mt-3 font-display text-3xl font-bold sm:text-5xl">Give the advisor language that sounds calm, direct, and clear</h2>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-[1fr_1fr]">
+        <article class="surface rounded-[2rem] p-6">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="text-xs font-black uppercase tracking-[0.16em] text-pine">Email subject</p>
+              <h3 id="templateSubject" class="mt-2 font-display text-2xl font-bold text-summit">Next steps</h3>
+            </div>
+            <button id="copySubject" class="copy-button" type="button">Copy</button>
+          </div>
+          <div class="mt-5 rounded-[1.5rem] bg-parchment/80 p-5">
+            <p class="text-xs font-black uppercase tracking-[0.16em] text-slate">Email body</p>
+            <pre id="templateEmail" class="mt-3 whitespace-pre-wrap text-sm leading-7 text-summit"></pre>
+          </div>
+          <div class="mt-4 flex justify-end">
+            <button id="copyEmail" class="copy-button" type="button">Copy email</button>
+          </div>
+        </article>
+
+        <div class="grid gap-6">
+          <article class="surface rounded-[2rem] p-6">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-xs font-black uppercase tracking-[0.16em] text-pine">Text message</p>
+                <h3 class="mt-2 font-display text-2xl font-bold text-summit">Short and calm follow-up</h3>
+              </div>
+              <button id="copyText" class="copy-button" type="button">Copy</button>
+            </div>
+            <p id="templateText" class="mt-4 rounded-[1.5rem] bg-parchment/80 p-5 text-sm leading-7 text-summit"></p>
+          </article>
+
+          <article class="rounded-[2rem] bg-summit p-6 text-white shadow-glow">
+            <p class="text-xs font-black uppercase tracking-[0.16em] text-trail">Call coaching prompt</p>
+            <p id="templateCall" class="mt-4 text-sm leading-7 text-white/85"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <p class="text-xs font-black uppercase tracking-[0.18em] text-pine">CRM workflow</p>
+        <h2 class="mt-3 font-display text-3xl font-bold sm:text-5xl">Track every lead to a clear outcome</h2>
+      </div>
+      <div id="crmBoard" class="grid gap-4 xl:grid-cols-3"></div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <p class="text-xs font-black uppercase tracking-[0.18em] text-pine">Success metrics</p>
+        <h2 class="mt-3 font-display text-3xl font-bold sm:text-5xl">Measure whether follow-up is actually improving decisions</h2>
+      </div>
+      <div id="kpis" class="grid gap-4 md:grid-cols-2 xl:grid-cols-4"></div>
+    </section>
+  </main>
+
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
