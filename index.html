@@ -140,7 +140,7 @@
             A seminar follow-up system that guides advisors without sounding reactive, pushy, or scripted.
           </h1>
           <p class="mt-7 max-w-3xl text-lg leading-8 text-white/82">
-            Built for retirement-focused advisors who want a more thoughtful path from seminar meeting to next conversation, this module helps them move hot, warm, and cold leads toward clarity, commitment, or a healthy nurture decision.
+            Built for retirement-focused advisors who need clean follow-up after a dinner seminar or a first planning consultation, this module helps them move hot, warm, and cold leads toward booking, commitment, or a healthy nurture decision.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a href="#coach" class="rounded-full bg-trail px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-summit">Open coaching module</a>
@@ -170,8 +170,8 @@
             </div>
             <div class="rounded-[1.4rem] bg-white/8 p-5">
               <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-white/68">Outcome</p>
-              <p class="mt-2 font-display text-3xl font-semibold">Signed or nurtured</p>
-              <p class="mt-2 text-sm leading-7 text-white/75">Every lead ends in execution, deferment, or a healthy nurture path.</p>
+              <p id="heroOutcomeTitle" class="mt-2 font-display text-3xl font-semibold">Booked or nurtured</p>
+              <p id="heroOutcomeCopy" class="mt-2 text-sm leading-7 text-white/75">Every lead ends in a booked consultation, deferment, or a healthy nurture path.</p>
             </div>
           </div>
         </article>
@@ -192,12 +192,28 @@
         <article class="surface rounded-[2rem] p-6">
           <div class="grid gap-5 sm:grid-cols-2">
             <label>
+              <span class="field-label">Workflow</span>
+              <select id="workflowMode" class="field mt-2">
+                <option value="seminar">After seminar</option>
+                <option value="consultation">After consultation</option>
+              </select>
+            </label>
+            <label>
               <span class="field-label">Lead name</span>
               <input id="leadName" class="field mt-2" type="text" value="Seminar Lead" />
             </label>
+          </div>
+
+          <div class="mt-5 grid gap-5 sm:grid-cols-2">
             <label>
-              <span class="field-label">Days since meeting</span>
+              <span id="daysLabel" class="field-label">Days since seminar</span>
               <input id="daysSinceMeeting" class="field mt-2" type="number" min="0" max="90" value="3" />
+            </label>
+            <label>
+              <span id="workflowHelpLabel" class="field-label">Process focus</span>
+              <div id="workflowDescription" class="mt-2 rounded-[1rem] border border-summit/8 bg-parchment/70 px-4 py-4 text-sm leading-6 text-slate">
+                Use this when the advisor is following up after attendance and wants to turn seminar interest into a booked consultation.
+              </div>
             </label>
           </div>
 
@@ -214,19 +230,19 @@
             <label class="rounded-[1.2rem] border border-summit/8 bg-parchment/70 p-4">
               <span class="flex items-center justify-between gap-4">
                 <span>
-                  <span class="field-label">Paperwork sent</span>
-                  <span class="mt-2 block text-sm leading-6 text-slate">Has the paperwork already gone out?</span>
+                  <span id="milestone1Label" class="field-label">Consultation requested</span>
+                  <span id="milestone1Help" class="mt-2 block text-sm leading-6 text-slate">Did they explicitly ask for or show clear interest in a follow-up conversation?</span>
                 </span>
-                <input id="paperworkSent" class="h-5 w-5 accent-pine" type="checkbox" checked />
+                <input id="milestone1" class="h-5 w-5 accent-pine" type="checkbox" />
               </span>
             </label>
             <label class="rounded-[1.2rem] border border-summit/8 bg-parchment/70 p-4">
               <span class="flex items-center justify-between gap-4">
                 <span>
-                  <span class="field-label">Signed</span>
-                  <span class="mt-2 block text-sm leading-6 text-slate">Has the lead already completed commitment?</span>
+                  <span id="milestone2Label" class="field-label">Appointment booked</span>
+                  <span id="milestone2Help" class="mt-2 block text-sm leading-6 text-slate">Has the first consultation actually been scheduled?</span>
                 </span>
-                <input id="signed" class="h-5 w-5 accent-pine" type="checkbox" />
+                <input id="milestone2" class="h-5 w-5 accent-pine" type="checkbox" />
               </span>
             </label>
           </div>
@@ -247,12 +263,12 @@
         <article class="rounded-[2rem] bg-summit p-6 text-white shadow-glow">
           <div class="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <p class="text-xs font-bold uppercase tracking-[0.2em] text-trail">Recommended mode</p>
+              <p id="coachTopLabel" class="text-xs font-bold uppercase tracking-[0.2em] text-trail">Recommended seminar mode</p>
               <h3 id="coachingLabel" class="mt-2 font-display text-4xl font-semibold">Warm lead coaching mode</h3>
               <p id="coachingFrame" class="mt-4 max-w-2xl text-sm leading-7 text-white/82"></p>
             </div>
             <div class="rounded-[1.4rem] bg-white/8 px-4 py-3 text-left">
-              <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-white/65">Primary channel</p>
+              <p id="channelLabel" class="text-[11px] font-bold uppercase tracking-[0.16em] text-white/65">Primary booking channel</p>
               <p id="channelStat" class="mt-2 font-display text-3xl font-semibold">Email</p>
             </div>
           </div>
@@ -278,17 +294,17 @@
 
           <div class="mt-6 grid gap-4 lg:grid-cols-2">
             <div class="rounded-[1.5rem] border border-white/10 bg-white/6 p-5">
-              <p class="text-xs font-black uppercase tracking-[0.16em] text-trail">Next best action</p>
+              <p id="nextActionLabel" class="text-xs font-black uppercase tracking-[0.16em] text-trail">Next best booking move</p>
               <p id="nextAction" class="mt-3 text-sm leading-7 text-white/86"></p>
             </div>
             <div class="rounded-[1.5rem] border border-white/10 bg-white/6 p-5">
-              <p class="text-xs font-black uppercase tracking-[0.16em] text-trail">Advisor coach note</p>
+              <p id="advisorPromptLabel" class="text-xs font-black uppercase tracking-[0.16em] text-trail">Advisor booking note</p>
               <p id="advisorPrompt" class="mt-3 text-sm leading-7 text-white/86"></p>
             </div>
           </div>
 
           <div class="mt-4 rounded-[1.5rem] border border-white/10 bg-white/6 p-5">
-            <p class="text-xs font-black uppercase tracking-[0.16em] text-trail">Friction play</p>
+            <p id="frictionPlayLabel" class="text-xs font-black uppercase tracking-[0.16em] text-trail">Booking friction play</p>
             <p id="frictionPlay" class="mt-3 text-sm leading-7 text-white/86"></p>
           </div>
         </article>
@@ -299,9 +315,9 @@
       <div class="mb-8">
         <p class="text-xs font-bold uppercase tracking-[0.22em] text-trail">Follow-up sequence</p>
         <div class="gold-rule mt-4"></div>
-        <h2 class="mt-5 font-display text-4xl font-semibold sm:text-6xl">A six-phase system from meeting to decision</h2>
-        <p class="mt-4 max-w-3xl text-base leading-7 text-slate">
-          This system is built to remove friction between intention and action, not to pressure a lead into signing.
+        <h2 id="playbookHeading" class="mt-5 font-display text-4xl font-semibold sm:text-6xl">A six-phase system from attendance to booked consultation</h2>
+        <p id="playbookCopy" class="mt-4 max-w-3xl text-base leading-7 text-slate">
+          This system is built to turn seminar relevance into a booked conversation without pressure, urgency theater, or generic check-ins.
         </p>
       </div>
       <div id="timeline" class="grid gap-4 xl:grid-cols-2"></div>
@@ -355,7 +371,7 @@
       <div class="mb-8">
         <p class="text-xs font-bold uppercase tracking-[0.22em] text-trail">CRM workflow</p>
         <div class="gold-rule mt-4"></div>
-        <h2 class="mt-5 font-display text-4xl font-semibold sm:text-6xl">Track every lead to a clear outcome</h2>
+        <h2 id="crmHeading" class="mt-5 font-display text-4xl font-semibold sm:text-6xl">Track every lead to a clear booking outcome</h2>
       </div>
       <div id="crmBoard" class="grid gap-4 xl:grid-cols-3"></div>
     </section>
@@ -364,7 +380,7 @@
       <div class="mb-8">
         <p class="text-xs font-bold uppercase tracking-[0.22em] text-trail">Success metrics</p>
         <div class="gold-rule mt-4"></div>
-        <h2 class="mt-5 font-display text-4xl font-semibold sm:text-6xl">Measure whether follow-up is actually improving decisions</h2>
+        <h2 id="kpiHeading" class="mt-5 font-display text-4xl font-semibold sm:text-6xl">Measure whether follow-up is actually improving movement</h2>
       </div>
       <div id="kpis" class="grid gap-4 md:grid-cols-2 xl:grid-cols-4"></div>
     </section>
