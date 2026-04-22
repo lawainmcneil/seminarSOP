@@ -81,6 +81,7 @@ const getSegmentView = () => {
 const getRecommendedPhase = () => {
   if (state.workflowMode === "seminar") {
     if (state.milestone2) return FOLLOW_UP_PHASES[4];
+    if (state.milestone1 && state.daysSinceMeeting <= 2) return FOLLOW_UP_PHASES[0];
     if (state.daysSinceMeeting <= 1) return FOLLOW_UP_PHASES[0];
     if (state.daysSinceMeeting <= 5) return FOLLOW_UP_PHASES[1];
     if (state.daysSinceMeeting <= 7) return FOLLOW_UP_PHASES[2];
@@ -90,7 +91,14 @@ const getRecommendedPhase = () => {
   }
 
   if (state.milestone2) return FOLLOW_UP_PHASES[4];
-  if (!state.milestone1) return FOLLOW_UP_PHASES[0];
+  if (!state.milestone1) {
+    if (state.daysSinceMeeting <= 1) return FOLLOW_UP_PHASES[0];
+    if (state.daysSinceMeeting <= 3) return FOLLOW_UP_PHASES[1];
+    if (state.daysSinceMeeting <= 7) return FOLLOW_UP_PHASES[3];
+    if (state.daysSinceMeeting <= 10) return FOLLOW_UP_PHASES[4];
+    return FOLLOW_UP_PHASES[5];
+  }
+
   if (state.daysSinceMeeting <= 1) return FOLLOW_UP_PHASES[0];
   if (state.daysSinceMeeting <= 3) return FOLLOW_UP_PHASES[1];
   if (state.daysSinceMeeting <= 7) {
@@ -98,6 +106,32 @@ const getRecommendedPhase = () => {
   }
   if (state.daysSinceMeeting <= 10) return FOLLOW_UP_PHASES[4];
   return FOLLOW_UP_PHASES[5];
+};
+
+const getPhaseDrivenPrefix = (phase) => {
+  if (state.workflowMode === "seminar") {
+    const seminarPrefixes = {
+      "phase-1": "Within the first day, the goal is to tie the seminar back to their personal concern and create immediate relevance.",
+      "phase-2": "By this point, the goal is to surface what is actually preventing the booking instead of assuming they just need another reminder.",
+      "phase-3": "At this stage, the outreach should teach one risk clearly enough to make the need feel personal.",
+      "phase-4": "Now the job is to make the first meeting feel smaller, easier, and less emotionally heavy.",
+      "phase-5": "At this point, the best move is a clean booking decision instead of more vague back-and-forth.",
+      "phase-6": "This lead has aged into nurture, so the tone should shift from pursuit to long-term relevance."
+    };
+
+    return seminarPrefixes[phase.id];
+  }
+
+  const consultationPrefixes = {
+    "phase-1": "Right after the consultation, the job is to preserve momentum while the recommendation still feels fresh.",
+    "phase-2": "A few days in, the best move is to identify the real hesitation instead of sending another generic follow-up.",
+    "phase-3": "This is the point to reframe risk and remind them that staying put is also a decision.",
+    "phase-4": "Now the focus should be reducing the emotional weight of implementation and making the next step feel smaller.",
+    "phase-5": "At this stage, the outreach should create decision clarity instead of continuing open-ended follow-up.",
+    "phase-6": "This lead has moved beyond active pursuit and should be handled with a low-pressure nurture posture."
+  };
+
+  return consultationPrefixes[phase.id];
 };
 
 const getPrimaryChannel = (phase) => {
@@ -223,8 +257,43 @@ const getNextActionText = (phase, segment, friction) => {
       }
     };
 
-    const action = temperatureActions[state.temperature]?.[state.friction] || "Move the attendee toward a clear booking decision or a clean nurture path.";
-    return `${milestoneLine} ${action}`;
+    const phaseLine = getPhaseDrivenPrefix(phase);
+    const phaseSpecificActions = {
+      "phase-1": {
+        hot: "Call first, mention the exact issue they raised, and offer two specific meeting windows.",
+        warm: "Send a personalized email tied to the topic they selected, then invite a short follow-up conversation.",
+        cold: "Use a light-touch email that makes the issue feel personal without pressing for immediate commitment."
+      },
+      "phase-2": {
+        hot: "Call and ask what still feels unsettled, then move directly toward the calendar once that point is clear.",
+        warm: "Use a calm question to surface hesitation, then simplify the invitation down to one focused conversation.",
+        cold: "Ask one clean clarity question and avoid layering on more pressure."
+      },
+      "phase-3": {
+        hot: "Send one sharp value note that makes the planning risk personal, then invite the meeting while urgency is still grounded in relevance.",
+        warm: "Use one educational risk example and connect it back to their stated concern before asking for the appointment.",
+        cold: "Offer one useful insight that creates relevance and let that do the work instead of over-following up."
+      },
+      "phase-4": {
+        hot: "Make the booking feel easy with a short agenda, a clear outcome, and a smaller first step.",
+        warm: "Reduce the emotional weight of the meeting by positioning it as a first pass, not a giant planning commitment.",
+        cold: "Offer a low-pressure next conversation or a later revisit, whichever preserves trust better."
+      },
+      "phase-5": {
+        hot: "Ask directly whether they want to get the consultation on the calendar now.",
+        warm: "Give them a clean choice between scheduling and revisiting later so drift does not keep growing.",
+        cold: "Use a respectful decision-clarity note and then route them to nurture if they stay inactive."
+      },
+      "phase-6": {
+        hot: "Keep the relationship warm with one useful touchpoint and a clean path back to the calendar.",
+        warm: "Move from active pursuit to periodic relevance touches that preserve trust.",
+        cold: "Stop chasing and let nurture do the work through education and future invitations."
+      }
+    };
+
+    const frictionAction = temperatureActions[state.temperature]?.[state.friction] || "Move the attendee toward a clear booking decision or a clean nurture path.";
+    const phaseAction = phaseSpecificActions[phase.id]?.[state.temperature] || "Use the phase objective to guide the next outreach.";
+    return `${phaseLine} ${milestoneLine} ${phaseAction} ${frictionAction}`;
   }
 
   if (state.milestone2) {
@@ -262,8 +331,43 @@ const getNextActionText = (phase, segment, friction) => {
     }
   };
 
-  const action = temperatureActions[state.temperature]?.[state.friction] || "Guide the lead to a clear next decision.";
-  return `${paperworkLine} ${action}`;
+  const phaseLine = getPhaseDrivenPrefix(phase);
+  const phaseSpecificActions = {
+    "phase-1": {
+      hot: "Send the same-day follow-up and make the next step feel immediate, simple, and expected.",
+      warm: "Re-anchor the recommendation to the client's original goal before extra hesitation shows up.",
+      cold: "Keep the first touch short and calm so the conversation does not immediately feel heavy."
+    },
+    "phase-2": {
+      hot: "Use a short note or call to isolate the one open loop instead of repeating the whole recommendation.",
+      warm: "Surface the actual hesitation and respond only to that point.",
+      cold: "Use one clean question that invites clarity without sounding needy."
+    },
+    "phase-3": {
+      hot: "Reframe the risk of staying put while keeping the tone grounded and confident.",
+      warm: "Use one example of inaction risk to help the client feel why movement matters now.",
+      cold: "Offer one calm reminder about the cost of delay, then avoid over-chasing."
+    },
+    "phase-4": {
+      hot: "Shrink the next step and make implementation feel easier than they are imagining.",
+      warm: "Offer staged execution or one account first so the path feels less heavy.",
+      cold: "Reduce complexity and make the next step feel optional enough to re-engage them."
+    },
+    "phase-5": {
+      hot: "Ask for a clean proceed-or-pause decision instead of keeping the loop open.",
+      warm: "Create a simple yes, later, or nurture choice so the lead does not stay in limbo.",
+      cold: "Use a respectful decision-clarity note and then release pressure."
+    },
+    "phase-6": {
+      hot: "Move the relationship into occasional reassurance and value touches until timing firms up again.",
+      warm: "Use nurture to preserve the relationship without dragging the active sale forward.",
+      cold: "Stop active pursuit and shift to long-term relevance."
+    }
+  };
+
+  const frictionAction = temperatureActions[state.temperature]?.[state.friction] || "Guide the lead to a clear next decision.";
+  const phaseAction = phaseSpecificActions[phase.id]?.[state.temperature] || "Use the current phase to guide the next outreach.";
+  return `${phaseLine} ${paperworkLine} ${phaseAction} ${frictionAction}`;
 };
 
 const renderTemperatureButtons = () => {
