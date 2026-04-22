@@ -411,3 +411,310 @@ No action needed now. If priorities shift or it makes sense to revisit the plan 
     }
   }
 };
+
+const EMAIL_VARIANTS = {
+  seminar: {
+    "phase-1": {
+      hot: {
+        default: {
+          subject: "A quick follow-up while this is still fresh",
+          intro: "You were clearly engaged at the seminar, so I wanted to follow up while the concern is still fresh."
+        }
+      },
+      warm: {
+        default: {
+          subject: "A quick follow-up on the topic you flagged",
+          intro: "You indicated there was a specific planning area you wanted to think through more carefully."
+        }
+      },
+      cold: {
+        default: {
+          subject: "One quick thought after the seminar",
+          intro: "Most people leave a seminar with one issue in the back of their mind, even if they are not ready to act right away."
+        }
+      }
+    },
+    "phase-2": {
+      hot: {
+        unclear: {
+          subject: "One point worth clearing up",
+          intro: "Usually at this stage there is just one thing that still does not feel fully settled."
+        },
+        spouse: {
+          subject: "It may help to look at this together",
+          intro: "Sometimes the next step becomes easier when both people can react to the same conversation at the same time."
+        },
+        default: {
+          subject: "One quick question after the seminar",
+          intro: "Before this turns into delay, it helps to identify the one thing that still feels open."
+        }
+      },
+      warm: {
+        unclear: {
+          subject: "What still feels unsettled?",
+          intro: "Most hesitation at this point is not a lack of interest, just one issue that still feels unclear."
+        },
+        timing: {
+          subject: "We can keep the next step simple",
+          intro: "If timing is the issue, the next conversation does not have to feel like a major commitment."
+        },
+        default: {
+          subject: "A quick follow-up question",
+          intro: "There is usually one thing standing between interest and action, and it helps to make that visible."
+        }
+      },
+      cold: {
+        silent: {
+          subject: "No pressure at all",
+          intro: "I know this may not be a top priority right now, so I wanted to keep this simple."
+        },
+        default: {
+          subject: "If one question would help",
+          intro: "If there is one issue you would want clarified before doing anything further, that is usually the right place to start."
+        }
+      }
+    },
+    "phase-3": {
+      hot: {
+        risk: {
+          subject: "Why waiting can quietly create risk",
+          intro: "One reason people act now is that planning gaps rarely stay neutral over time."
+        },
+        default: {
+          subject: "One thing worth looking at now",
+          intro: "This is the stage where making the issue personal matters more than adding more information."
+        }
+      },
+      warm: {
+        risk: {
+          subject: "One risk most people underestimate",
+          intro: "What matters is not just the topic itself, but how it affects your situation if it stays unaddressed."
+        },
+        default: {
+          subject: "One thing many retirees miss",
+          intro: "A focused planning risk is often the easiest way to decide whether a conversation is worth having."
+        }
+      },
+      cold: {
+        default: {
+          subject: "One useful idea to keep in mind",
+          intro: "If nothing else, I wanted to leave you with one point that tends to matter more over time."
+        }
+      }
+    },
+    "phase-4": {
+      hot: {
+        default: {
+          subject: "We can make the next step easy",
+          intro: "If the hesitation is about making this feel too big, we can narrow the conversation down to one clear objective."
+        }
+      },
+      warm: {
+        timing: {
+          subject: "This does not have to be a big step",
+          intro: "A first conversation can stay small and focused without turning into an all-at-once planning process."
+        },
+        default: {
+          subject: "We can keep this simple",
+          intro: "The next step does not need to feel heavy for it to be worthwhile."
+        }
+      },
+      cold: {
+        default: {
+          subject: "If a smaller next step would help",
+          intro: "Sometimes the right move is simply a lighter first conversation instead of a full planning commitment."
+        }
+      }
+    },
+    "phase-5": {
+      hot: {
+        default: {
+          subject: "Would it make sense to get this scheduled?",
+          intro: "At this point, the cleanest move is usually to either get the conversation on the calendar or set it aside for now."
+        }
+      },
+      warm: {
+        default: {
+          subject: "A simple next-step question",
+          intro: "Usually by this stage it helps to choose between scheduling the conversation and revisiting later."
+        }
+      },
+      cold: {
+        default: {
+          subject: "Completely fine either way",
+          intro: "There is no pressure here. My only goal is to help you make a clear decision instead of leaving it vague."
+        }
+      }
+    },
+    "phase-6": {
+      hot: {
+        default: {
+          subject: "Keeping the conversation open",
+          intro: "I wanted to keep this on your radar without turning it into pressure."
+        }
+      },
+      warm: {
+        default: {
+          subject: "Staying in touch in a useful way",
+          intro: "Even when timing is not right, it still helps to keep the right information nearby."
+        }
+      },
+      cold: {
+        default: {
+          subject: "Whenever this becomes relevant again",
+          intro: "No action needed now. I just wanted to leave the door open if the topic becomes more important later."
+        }
+      }
+    }
+  },
+  consultation: {
+    "phase-1": {
+      hot: {
+        default: {
+          subject: "Everything is ready on my side",
+          intro: "Because the direction already felt clear in our conversation, I wanted to keep momentum simple and steady."
+        }
+      },
+      warm: {
+        default: {
+          subject: "A quick note after our conversation",
+          intro: "Often the first follow-up works best when it simply reconnects the recommendation to the goal you outlined."
+        }
+      },
+      cold: {
+        default: {
+          subject: "No pressure, just a clean next step",
+          intro: "I wanted to make the next step easy without adding any pressure."
+        }
+      }
+    },
+    "phase-2": {
+      hot: {
+        paperwork: {
+          subject: "A quick note on the paperwork",
+          intro: "Usually at this stage the issue is not the strategy, just making the mechanics feel easier."
+        },
+        default: {
+          subject: "One point worth clarifying",
+          intro: "If anything is holding this up, it is usually one unsettled point rather than the whole recommendation."
+        }
+      },
+      warm: {
+        unclear: {
+          subject: "What still feels unsettled?",
+          intro: "When someone pauses here, it is usually because one part of the recommendation still feels unresolved."
+        },
+        spouse: {
+          subject: "It may help to align on this together",
+          intro: "Sometimes the real pause is not disagreement, just needing a shared conversation around the decision."
+        },
+        default: {
+          subject: "A quick check-in",
+          intro: "Before more time goes by, it helps to identify what is actually creating hesitation."
+        }
+      },
+      cold: {
+        silent: {
+          subject: "No pressure from my side",
+          intro: "I know silence at this stage often means something feels unresolved, not necessarily that the whole idea is off the table."
+        },
+        default: {
+          subject: "One quick question",
+          intro: "If there is one thing making this harder to act on, that is the most useful thing to surface."
+        }
+      }
+    },
+    "phase-3": {
+      hot: {
+        risk: {
+          subject: "Why waiting is still a decision",
+          intro: "At this stage the biggest risk is often assuming that no move means no consequence."
+        },
+        default: {
+          subject: "One thing to keep in mind",
+          intro: "This is the point where it helps to re-anchor the cost of delay without creating pressure."
+        }
+      },
+      warm: {
+        risk: {
+          subject: "The part of this decision people underestimate",
+          intro: "Often the real issue is not whether the plan is perfect, but what happens if the current risk stays untouched."
+        },
+        default: {
+          subject: "One planning reminder",
+          intro: "A steady reminder about inaction risk often makes the next step easier to evaluate clearly."
+        }
+      },
+      cold: {
+        default: {
+          subject: "A calm perspective to consider",
+          intro: "I wanted to offer one perspective that may help if the decision still feels heavy."
+        }
+      }
+    },
+    "phase-4": {
+      hot: {
+        default: {
+          subject: "We can make the next step lighter",
+          intro: "If what is slowing this down is how big it feels, we can shrink the implementation step without losing progress."
+        }
+      },
+      warm: {
+        timing: {
+          subject: "This does not have to be all at once",
+          intro: "If timing is part of the hesitation, it may help to think in stages instead of one large move."
+        },
+        default: {
+          subject: "A smaller first step may be enough",
+          intro: "At this point the most useful move is often to reduce the emotional weight of implementation."
+        }
+      },
+      cold: {
+        default: {
+          subject: "If the next step feels too big",
+          intro: "Sometimes the best way forward is to narrow the decision down until it feels manageable again."
+        }
+      }
+    },
+    "phase-5": {
+      hot: {
+        default: {
+          subject: "Are you ready to move forward?",
+          intro: "At this stage, what usually helps most is a clean decision rather than more open-ended follow-up."
+        }
+      },
+      warm: {
+        default: {
+          subject: "A simple next-step question",
+          intro: "Usually by this point it is better to decide whether to move forward now or revisit later."
+        }
+      },
+      cold: {
+        default: {
+          subject: "Either path is completely fine",
+          intro: "There is no pressure from me. My goal is just to help you make a clear decision instead of letting this hang open."
+        }
+      }
+    },
+    "phase-6": {
+      hot: {
+        default: {
+          subject: "Keeping the door open",
+          intro: "I wanted to stay present without turning this into pressure."
+        }
+      },
+      warm: {
+        default: {
+          subject: "Staying connected without pressure",
+          intro: "If this is a later conversation, that is completely fine. I just want to keep the relationship useful."
+        }
+      },
+      cold: {
+        default: {
+          subject: "If priorities shift later",
+          intro: "No action needed now. I just wanted to leave the path open if the timing changes."
+        }
+      }
+    }
+  }
+};

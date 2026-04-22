@@ -134,6 +134,14 @@ const getPhaseDrivenPrefix = (phase) => {
   return consultationPrefixes[phase.id];
 };
 
+const getEmailVariant = (phaseId) => {
+  const workflowVariants = EMAIL_VARIANTS[state.workflowMode] || {};
+  const phaseVariants = workflowVariants[phaseId] || {};
+  const segmentVariants = phaseVariants[state.temperature] || {};
+
+  return segmentVariants[state.friction] || segmentVariants.default || null;
+};
+
 const getPrimaryChannel = (phase) => {
   if (state.workflowMode === "seminar") {
     if (phase.id === "phase-1") {
@@ -417,8 +425,13 @@ const renderTimeline = (currentPhaseId) => {
 
 const renderTemplates = (phaseId, name) => {
   const phaseTemplate = TEMPLATES[state.workflowMode][phaseId];
-  elements.templateSubject.textContent = phaseTemplate.emailSubject;
-  elements.templateEmail.textContent = phaseTemplate.emailBody.replaceAll("[specific outcome tied to their goal]", `${name}'s stated planning outcome`);
+  const variant = getEmailVariant(phaseId);
+  const subject = variant?.subject || phaseTemplate.emailSubject;
+  const intro = variant?.intro ? `${variant.intro}\n\n` : "";
+  const mergedEmail = `${intro}${phaseTemplate.emailBody}`;
+
+  elements.templateSubject.textContent = subject;
+  elements.templateEmail.textContent = mergedEmail.replaceAll("[specific outcome tied to their goal]", `${name}'s stated planning outcome`);
   elements.templateText.textContent = phaseTemplate.textBody.replaceAll("[specific outcome tied to their goal]", `${name}'s stated planning outcome`);
   elements.templateCall.textContent = phaseTemplate.callPrompt;
 };
