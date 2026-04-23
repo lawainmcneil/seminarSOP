@@ -402,7 +402,7 @@ const renderTimeline = (currentPhaseId) => {
             <p class="text-xs font-black uppercase tracking-[0.16em] ${isActive ? "text-pine" : "text-slate"}">${phase.window}</p>
             <h3 class="mt-2 font-display text-2xl font-bold text-summit">${phase.name}</h3>
           </div>
-          <span class="${isActive ? "bg-pine text-white" : "bg-glacier text-pine"} inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em]">${isActive ? "Recommended now" : "Use when due"}</span>
+          <span class="${isActive ? "phase-pill-active bg-pine text-white" : "bg-glacier text-pine"} inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em]">${isActive ? "Recommended now" : "Use when due"}</span>
         </div>
         <p class="mt-3 text-sm leading-7 text-slate">${objective}</p>
         <div class="mt-4 grid gap-3 sm:grid-cols-2">

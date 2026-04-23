@@ -6,7 +6,7 @@
   <title>The Sherpa Seminar Coaching System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Open+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -24,7 +24,8 @@
           },
           fontFamily: {
             sans: ["Open Sans", "ui-sans-serif", "system-ui", "sans-serif"],
-            display: ["Cormorant Garamond", "Georgia", "serif"]
+            display: ["Cormorant Garamond", "Georgia", "serif"],
+            mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"]
           },
           boxShadow: {
             glow: "0 28px 70px rgba(23, 49, 43, 0.10)"
@@ -35,37 +36,40 @@
   </script>
   <style>
     body {
-      background: #fbfaf6;
-      color: #17312b;
+      background:
+        radial-gradient(circle at top, rgba(212, 168, 83, 0.08), transparent 28%),
+        linear-gradient(180deg, #080b0c 0%, #0d1213 48%, #090d0e 100%);
+      color: #f4ecdd;
     }
 
     .hero {
       background:
-        linear-gradient(135deg, rgba(23, 49, 43, 0.92), rgba(32, 58, 52, 0.84)),
+        linear-gradient(135deg, rgba(8, 12, 13, 0.96), rgba(10, 16, 17, 0.92)),
         url("https://images.unsplash.com/photo-1518655048521-f130df041f66?auto=format&fit=crop&w=1800&q=80");
       background-position: center;
       background-size: cover;
+      border-bottom: 1px solid rgba(212, 168, 83, 0.14);
     }
 
     .site-header {
-      border-bottom: 1px solid rgba(23, 49, 43, 0.08);
-      background: rgba(248, 244, 236, 0.96);
+      border-bottom: 1px solid rgba(212, 168, 83, 0.16);
+      background: rgba(7, 10, 11, 0.92);
       backdrop-filter: blur(14px);
     }
 
     .surface {
-      border: 1px solid rgba(23, 49, 43, 0.08);
-      background: #ffffff;
-      box-shadow: 0 22px 50px rgba(23, 49, 43, 0.06);
+      border: 1px solid rgba(212, 168, 83, 0.14);
+      background: linear-gradient(180deg, rgba(15, 20, 21, 0.96), rgba(11, 15, 16, 0.96));
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.28);
     }
 
     .field {
       width: 100%;
       border-radius: 1rem;
-      border: 1px solid rgba(23, 49, 43, 0.12);
-      background: #ffffff;
+      border: 1px solid rgba(212, 168, 83, 0.14);
+      background: rgba(18, 24, 26, 0.96);
       padding: 0.82rem 0.95rem;
-      color: #17312b;
+      color: #f4ecdd;
       font-size: 0.96rem;
     }
 
@@ -73,45 +77,124 @@
       display: block;
       font-size: 0.74rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #5d6c6a;
+      color: #d4a853;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
     }
 
     .copy-button {
       border-radius: 999px;
-      border: 1px solid rgba(183, 147, 85, 0.45);
-      background: #fffdf9;
+      border: 1px solid rgba(212, 168, 83, 0.32);
+      background: rgba(14, 20, 21, 0.96);
       padding: 0.6rem 0.9rem;
       font-size: 0.75rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #2f544d;
+      color: #d4a853;
       transition: 180ms ease;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
     }
 
     .copy-button:hover {
       transform: translateY(-1px);
-      border-color: rgba(183, 147, 85, 0.9);
-      background: #f8f1e4;
+      border-color: rgba(212, 168, 83, 0.82);
+      background: rgba(25, 32, 34, 0.98);
     }
 
     .gold-rule {
       width: 74px;
       height: 2px;
-      background: linear-gradient(90deg, rgba(183, 147, 85, 0.15), #b79355, rgba(183, 147, 85, 0.15));
+      background: linear-gradient(90deg, rgba(212, 168, 83, 0.06), #d4a853, rgba(212, 168, 83, 0.06));
     }
 
     .hero-card {
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 26px 70px rgba(13, 28, 25, 0.24);
+      border: 1px solid rgba(212, 168, 83, 0.14);
+      background: linear-gradient(180deg, rgba(14, 20, 22, 0.9), rgba(11, 16, 18, 0.94));
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(10px);
     }
 
     .section-shell {
-      border-top: 1px solid rgba(23, 49, 43, 0.06);
+      border-top: 1px solid rgba(212, 168, 83, 0.12);
+    }
+
+    .text-slate {
+      color: #a9b0aa !important;
+    }
+
+    .text-summit {
+      color: #f4ecdd !important;
+    }
+
+    .text-pine,
+    .text-trail {
+      color: #d4a853 !important;
+    }
+
+    .bg-summit {
+      background: linear-gradient(180deg, rgba(15, 20, 21, 0.98), rgba(10, 14, 15, 0.98)) !important;
+    }
+
+    [class*="bg-parchment/"],
+    [class*="bg-white/8"],
+    [class*="bg-white/6"],
+    [class*="bg-white/80"],
+    [class*="bg-white/82"],
+    [class*="bg-pine/[0.07]"],
+    [class*="bg-pine/[0.06]"],
+    [class*="bg-trail/[0.08]"],
+    [class*="bg-white/75"] {
+      background: linear-gradient(180deg, rgba(17, 22, 24, 0.96), rgba(12, 17, 18, 0.96)) !important;
+    }
+
+    [class*="border-summit/8"],
+    [class*="border-white/10"],
+    [class*="border-pine/20"],
+    [class*="border-pine/25"],
+    [class*="border-trail/35"] {
+      border-color: rgba(212, 168, 83, 0.14) !important;
+    }
+
+    footer {
+      background: rgba(7, 10, 11, 0.96);
+    }
+
+    nav a,
+    footer p {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    .pillar-card {
+      position: relative;
+      border: 1px solid rgba(212, 168, 83, 0.14);
+      background: linear-gradient(180deg, rgba(17, 22, 24, 0.94), rgba(11, 16, 17, 0.96));
+      box-shadow: inset 0 1px 0 rgba(212, 168, 83, 0.05);
+    }
+
+    .pillar-card::before {
+      content: "";
+      position: absolute;
+      left: 1.25rem;
+      right: 1.25rem;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(212, 168, 83, 0), rgba(212, 168, 83, 0.6), rgba(212, 168, 83, 0));
+    }
+
+    .phase-pill-active::before {
+      content: "➜";
+      display: inline-block;
+      margin-right: 0.45rem;
+      color: #d4a853;
+      text-shadow: 0 0 12px rgba(212, 168, 83, 0.28);
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        background-position: 62% center;
+      }
     }
   </style>
 </head>
@@ -128,14 +211,14 @@
         <a href="#playbook" class="transition hover:text-pine">Workflow</a>
         <a href="#rights" class="transition hover:text-pine">Rights</a>
       </div>
-      <a href="#templates" class="rounded-full border border-trail/60 bg-white px-5 py-2.5 text-sm font-bold text-pine transition hover:bg-parchment">Get Started</a>
+      <a href="#templates" class="rounded-md border border-trail/60 bg-transparent px-5 py-2.5 font-mono text-sm font-bold text-pine transition hover:bg-white/5">Get Started</a>
     </nav>
   </header>
   <main>
     <section id="top" class="hero px-4 py-20 text-white sm:px-6 lg:px-8">
       <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div>
-          <p class="text-xs font-bold uppercase tracking-[0.28em] text-trail">Financial guidance that feels calm, clear, and confident</p>
+          <p class="font-mono text-xs font-bold uppercase tracking-[0.28em] text-trail">The platform for seminar follow-up coaching</p>
           <div class="gold-rule mt-5"></div>
           <h1 class="mt-7 max-w-5xl font-display text-5xl font-semibold leading-[0.98] sm:text-7xl">
             A seminar follow-up system that guides advisors without sounding reactive, pushy, or scripted.
@@ -144,8 +227,8 @@
             Built for retirement-focused advisors who need clean follow-up after a dinner seminar or a first planning consultation, this module helps them move hot, warm, and cold leads toward booking, commitment, or a healthy nurture decision.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#coach" class="rounded-full bg-trail px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-summit">Open coaching module</a>
-            <a href="#templates" class="rounded-full border border-white/25 px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-white">View templates</a>
+            <a href="#coach" class="rounded-md bg-trail px-6 py-3 font-mono text-sm font-bold uppercase tracking-[0.18em] text-[#0a0e0f]">Open coaching module</a>
+            <a href="#templates" class="rounded-md border border-white/25 px-6 py-3 font-mono text-sm font-bold uppercase tracking-[0.18em] text-white">View templates</a>
           </div>
         </div>
 
@@ -154,22 +237,22 @@
           <h2 class="mt-4 font-display text-4xl font-semibold">A better follow-up experience for advisor and client</h2>
           <p class="mt-4 text-sm leading-7 text-white/78">The system keeps authority high and emotional pressure low. It replaces repeated check-ins with intentional moves.</p>
           <div class="mt-5 grid gap-4 sm:grid-cols-2">
-            <div class="rounded-[1.4rem] bg-white/8 p-5">
+            <div class="pillar-card rounded-[1.4rem] p-5">
               <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-white/68">Pillar 1</p>
               <p class="mt-2 font-display text-3xl font-semibold">Clarity</p>
               <p class="mt-2 text-sm leading-7 text-white/75">Remove confusion and isolate the one thing keeping action from happening.</p>
             </div>
-            <div class="rounded-[1.4rem] bg-white/8 p-5">
+            <div class="pillar-card rounded-[1.4rem] p-5">
               <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-white/68">Pillar 2</p>
               <p class="mt-2 font-display text-3xl font-semibold">Safety</p>
               <p class="mt-2 text-sm leading-7 text-white/75">Reduce the perceived risk and irreversibility of saying yes.</p>
             </div>
-            <div class="rounded-[1.4rem] bg-white/8 p-5">
+            <div class="pillar-card rounded-[1.4rem] p-5">
               <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-white/68">Pillar 3</p>
               <p class="mt-2 font-display text-3xl font-semibold">Decision</p>
               <p class="mt-2 text-sm leading-7 text-white/75">Guide the lead to a clean decision instead of endless chasing.</p>
             </div>
-            <div class="rounded-[1.4rem] bg-white/8 p-5">
+            <div class="pillar-card rounded-[1.4rem] p-5">
               <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-white/68">Outcome</p>
               <p id="heroOutcomeTitle" class="mt-2 font-display text-3xl font-semibold">Booked or nurtured</p>
               <p id="heroOutcomeCopy" class="mt-2 text-sm leading-7 text-white/75">Every lead ends in a booked consultation, deferment, or a healthy nurture path.</p>
